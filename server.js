@@ -139,6 +139,17 @@ function shuffle(arr) {
   return a;
 }
 
+// 转换卡牌数据：bonus -> color（客户端期望 color 字段）
+function toClientCard(card) {
+  return {
+    id: card.id,
+    cost: card.cost,
+    points: card.points,
+    color: card.bonus,  // bonus 转换为 color
+    level: card.level
+  };
+}
+
 function initGameState(players) {
   // 洗牌
   const lv1Deck = shuffle(CARD_DATA.filter(c => c.level === 1));
@@ -160,16 +171,19 @@ function initGameState(players) {
     points: 0,
     gems: { white:0, blue:0, green:0, red:0, black:0, gold:0 },
     cards: [],
-    reserved: []
+    reserved: [],
+    cardCount: 0,       // 客户端期望
+    reservedCount: 0    // 客户端期望
   }));
 
   // 客户端期望 board.level1, board.level2, board.level3 格式
+  // 并且卡牌的 bonus 字段需要转换为 color
   return {
     players: gamePlayers,
     board: {
-      level1: { shown: lv1Deck.slice(0, 4), deckCount: lv1Deck.length - 4 },
-      level2: { shown: lv2Deck.slice(0, 4), deckCount: lv2Deck.length - 4 },
-      level3: { shown: lv3Deck.slice(0, 4), deckCount: lv3Deck.length - 4 }
+      level1: { shown: lv1Deck.slice(0, 4).map(toClientCard), deckCount: lv1Deck.length - 4 },
+      level2: { shown: lv2Deck.slice(0, 4).map(toClientCard), deckCount: lv2Deck.length - 4 },
+      level3: { shown: lv3Deck.slice(0, 4).map(toClientCard), deckCount: lv3Deck.length - 4 }
     },
     nobles,
     bankGems,
