@@ -117,16 +117,16 @@ const CARD_DATA = [
 ];
 
 const NOBLE_DATA = [
-  { id:1,required:{white:4,blue:0,green:0,red:0,black:0} },
-  { id:2,required:{white:0,blue:4,green:0,red:0,black:0} },
-  { id:3,required:{white:0,blue:0,green:4,red:0,black:0} },
-  { id:4,required:{white:0,blue:0,green:0,red:4,black:0} },
-  { id:5,required:{white:0,blue:0,green:0,red:0,black:4} },
-  { id:6,required:{white:3,blue:3,green:0,red:0,black:0} },
-  { id:7,required:{white:3,blue:0,green:0,red:3,black:0} },
-  { id:8,required:{white:0,blue:3,green:3,red:0,black:0} },
-  { id:9,required:{white:0,blue:0,green:3,red:3,black:0} },
-  { id:10,required:{white:0,blue:0,green:0,red:3,black:3} },
+  { id:1, required:{white:4,blue:0,green:0,red:0,black:0}, points:3, image:'nobles/noble01.svg' },
+  { id:2, required:{white:0,blue:4,green:0,red:0,black:0}, points:3, image:'nobles/noble02.svg' },
+  { id:3, required:{white:0,blue:0,green:4,red:0,black:0}, points:3, image:'nobles/noble03.svg' },
+  { id:4, required:{white:0,blue:0,green:0,red:4,black:0}, points:3, image:'nobles/noble04.svg' },
+  { id:5, required:{white:0,blue:0,green:0,red:0,black:4}, points:3, image:'nobles/noble05.svg' },
+  { id:6, required:{white:3,blue:3,green:0,red:0,black:0}, points:3, image:'nobles/noble06.svg' },
+  { id:7, required:{white:3,blue:0,green:0,red:3,black:0}, points:3, image:'nobles/noble07.svg' },
+  { id:8, required:{white:0,blue:3,green:3,red:0,black:0}, points:3, image:'nobles/noble08.svg' },
+  { id:9, required:{white:0,blue:0,green:3,red:3,black:0}, points:3, image:'nobles/noble09.svg' },
+  { id:10,required:{white:0,blue:0,green:0,red:3,black:3}, points:3, image:'nobles/noble10.svg' },
 ];
 
 // ===== 游戏状态生成 =====
