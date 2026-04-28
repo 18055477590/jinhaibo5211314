@@ -117,16 +117,16 @@ const CARD_DATA = [
 ];
 
 const NOBLE_DATA = [
-  { id:1, required:{white:4,blue:0,green:0,red:0,black:0}, points:3, image:'nobles/noble01.svg' },
-  { id:2, required:{white:0,blue:4,green:0,red:0,black:0}, points:3, image:'nobles/noble02.svg' },
-  { id:3, required:{white:0,blue:0,green:4,red:0,black:0}, points:3, image:'nobles/noble03.svg' },
-  { id:4, required:{white:0,blue:0,green:0,red:4,black:0}, points:3, image:'nobles/noble04.svg' },
-  { id:5, required:{white:0,blue:0,green:0,red:0,black:4}, points:3, image:'nobles/noble05.svg' },
-  { id:6, required:{white:3,blue:3,green:0,red:0,black:0}, points:3, image:'nobles/noble06.svg' },
-  { id:7, required:{white:3,blue:0,green:0,red:3,black:0}, points:3, image:'nobles/noble07.svg' },
-  { id:8, required:{white:0,blue:3,green:3,red:0,black:0}, points:3, image:'nobles/noble08.svg' },
-  { id:9, required:{white:0,blue:0,green:3,red:3,black:0}, points:3, image:'nobles/noble09.svg' },
-  { id:10,required:{white:0,blue:0,green:0,red:3,black:3}, points:3, image:'nobles/noble10.svg' },
+  { id:1,  required:{white:4,blue:0,green:0,red:0,black:0}, points:3 },
+  { id:2,  required:{white:0,blue:4,green:0,red:0,black:0}, points:3 },
+  { id:3,  required:{white:0,blue:0,green:4,red:0,black:0}, points:3 },
+  { id:4,  required:{white:0,blue:0,green:0,red:4,black:0}, points:3 },
+  { id:5,  required:{white:0,blue:0,green:0,red:0,black:4}, points:3 },
+  { id:6,  required:{white:3,blue:3,green:0,red:0,black:0}, points:3 },
+  { id:7,  required:{white:3,blue:0,green:0,red:3,black:0}, points:3 },
+  { id:8,  required:{white:0,blue:3,green:3,red:0,black:0}, points:3 },
+  { id:9,  required:{white:0,blue:0,green:3,red:3,black:0}, points:3 },
+  { id:10, required:{white:0,blue:0,green:0,red:3,black:3}, points:3 },
 ];
 
 // ===== 游戏状态生成 =====
@@ -146,10 +146,6 @@ function initGameState(players) {
   const lv3Deck = shuffle(CARD_DATA.filter(c => c.level === 3));
   const nobleDeck = shuffle(NOBLE_DATA);
 
-  // 桌面展示卡（每级4张 + 1张背面代表牌库）
-  const shown = { level1: lv1Deck.slice(0, 4), level2: lv2Deck.slice(0, 4), level3: lv3Deck.slice(0, 4) };
-  const decks  = { level1: lv1Deck.slice(4), level2: lv2Deck.slice(4), level3: lv3Deck.slice(4) };
-
   // 初始银行：每色4个 + 黄金5个
   const bankGems = { white:4, blue:4, green:4, red:4, black:4, gold:5 };
 
@@ -167,9 +163,14 @@ function initGameState(players) {
     reserved: []
   }));
 
+  // 客户端期望 board.level1, board.level2, board.level3 格式
   return {
     players: gamePlayers,
-    board: { shown, decks },
+    board: {
+      level1: { shown: lv1Deck.slice(0, 4), deckCount: lv1Deck.length - 4 },
+      level2: { shown: lv2Deck.slice(0, 4), deckCount: lv2Deck.length - 4 },
+      level3: { shown: lv3Deck.slice(0, 4), deckCount: lv3Deck.length - 4 }
+    },
     nobles,
     bankGems,
     currentTurn: 0,
